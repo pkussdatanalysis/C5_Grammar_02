@@ -10,43 +10,40 @@
   Output: Excel是一个非常广泛使用的数据分析工具。 但是，如果您更愿意在R中进行分析，您需要了解如何将CSV数据导入到R中。
     本章将向您展示如何使用readxl和gdata来实现,这两个包已经为你加载了
 
-- Class: cmd_question
-  Output: 你可以在工作目录中找到Excel文件urbanpop.xlsx，输入dir（）来查看它。 这个数据集包含世界上几乎所有国家的城市人口指标（来源：Gapminder）。 
-    它包含三个不同时间段的三张表。 在每张表中，第一行包含列名称。
-  CorrectAnswer: dir()
-  AnswerTests: omnitest(correctExpr='dir()')
-  Hint: dir()
+- Class: text
+  Output: 我们已经可以在工作目录中为你下载了一个Excel文件urbanpop.xlsx。 这个数据集包含世界上几乎所有国家的城市人口指标（来源：Gapminder）。 
+    它包含三个不同时间段的三张表。 在每张表中，第一行包含列名称。这个excel文件的路径我们放在了预定义路径字符串变量xlsx_path中。
 
 - Class: cmd_question
-  Output: 在开始从Excel导入之前，您应该了解哪些工作表可用于工作簿。 你可以使用excel_sheets（）函数。excel_sheets（）函数是readxl包里的函数，
-    这个函数需要path类型变量作为参数，可以用file.path("urbanpop.xlsx")来生成工作目录下urbanpop.xlsx的path变量
-  CorrectAnswer: excel_sheets(file.path("urbanpop.xlsx"))
-  AnswerTests: omnitest(correctExpr='excel_sheets(file.path("urbanpop.xlsx"))')
-  Hint: 在命令行输入excel_sheets(file.path("urbanpop.xlsx"))
+  Output: 在开始从Excel导入之前，您应该了解哪些工作表可用于工作簿。 你可以使用excel_sheets()函数。excel_sheets()函数是readxl包里的函数，
+    这个函数需要path类型变量作为参数，可以用file.path()来生成工作目录下urbanpop.xlsx的path变量
+  CorrectAnswer: excel_sheets(file.path(xlsx_path))
+  AnswerTests: omnitest(correctExpr='excel_sheets(file.path(xlsx_path))')
+  Hint: 在命令行输入excel_sheets(file.path(xlsx_path))
 
 - Class: text
   Output: 现在您知道要导入的Excel文件中的工作表名称，现在可以将这些工作表导入R.您可以使用read_excel（）函数执行此操作。 看看这个方法：
     data < - read_excel(“data.xlsx”，sheet =“my_sheet”)这个调用只是从“data.xlsx”文件中导入名为“my_sheet”的表。 您也可以将一个数字传递给
     表单参数; 这将导致read_excel（）导入带有给定图纸编号的工作表。 sheet = 1将导入第一个工作表，sheet = 2将导入第二个工作表，依此类推。
-    在本练习中，您将继续使用urbanpop.xlsx文件。
+    在本练习中，您将继续使用urbanpop.xlsx文件。路径字符串依然为预定义路径字符串变量xlsx_path。
 
 - Class: cmd_question
   Output: 添加一个命令来导入第一个工作表，并将结果数据框存储在pop_1中
-  CorrectAnswer: pop_1 <- read_excel("urbanpop.xlsx", sheet = 1)
-  AnswerTests: omnitest(correctExpr='pop_1 <- read_excel("urbanpop.xlsx", sheet = 1)')
-  Hint: pop_1 <- read_excel("urbanpop.xlsx", sheet = 1)
+  CorrectAnswer: pop_1 <- read_excel(xlsx_path, sheet = 1)
+  AnswerTests: omnitest(correctExpr='pop_1 <- read_excel(xlsx_path, sheet = 1)')
+  Hint: pop_1 <- read_excel(xlsx_path, sheet = 1)
 
 - Class: cmd_question
   Output: 添加一个命令来导入第二个工作表，并将结果数据框存储在pop_2中
-  CorrectAnswer: pop_2 <- read_excel("urbanpop.xlsx", sheet = 2)
-  AnswerTests: omnitest(correctExpr='pop_2 <- read_excel("urbanpop.xlsx", sheet = 2)')
-  Hint: pop_2 <- read_excel("urbanpop.xlsx", sheet = 2)
+  CorrectAnswer: pop_2 <- read_excel(xlsx_path, sheet = 2)
+  AnswerTests: omnitest(correctExpr='pop_2 <- read_excel(xlsx_path, sheet = 2)')
+  Hint: pop_2 <- read_excel(xlsx_path, sheet = 2)
 
 - Class: cmd_question
   Output: 添加一个命令来导入第三个工作表，并将结果数据框存储在pop_3中
-  CorrectAnswer: pop_3 <- read_excel("urbanpop.xlsx", sheet = 3)
-  AnswerTests: omnitest(correctExpr='pop_3 <- read_excel("urbanpop.xlsx", sheet = 3)')
-  Hint: pop_3 <- read_excel("urbanpop.xlsx", sheet = 3)
+  CorrectAnswer: pop_3 <- read_excel(xlsx_path, sheet = 3)
+  AnswerTests: omnitest(correctExpr='pop_3 <- read_excel(xlsx_path, sheet = 3)')
+  Hint: pop_3 <- read_excel(xlsx_path, sheet = 3)
 
 - Class: cmd_question
   Output: 将数据框pop_1，pop_2和pop_3存储在列表中，叫做pop_list
@@ -56,15 +53,15 @@
 
 - Class: text
   Output: 在之前的练习中，您生成了三个你导入的Excel表单的列表。 但是，手动加载每个表单然后将它们合并到一个列表中可能会非常繁琐。 
-    幸运的是，你可以使用lapply（）自动执行此操作。看看下面的例子代码：my_workbook < - lapply（excel_sheets（“data.xlsx”），read_excel，
+    幸运的是，你可以使用lapply（）自动执行此操作。看看下面的例子代码：my_workbook < - lapply(excel_sheets（“data.xlsx”)，read_excel，
     path =“data.xlsx”）read_excel（）函数在“data.xlsx”文件中被多次调用，每个表单被一个接一个地加载。 结果是数据框的列表，
     每个数据框表示data.xlsx中的一个表单。你仍然使用urbanpop.xlsx文件。
 
 - Class: cmd_question
   Output: 使用lapply（）与excel_sheets（）和read_excel（）结合来读取“urbanpop.xlsx”中的所有Excel工作表。 命名结果列表pop_list。
-  CorrectAnswer: pop_list <- lapply(excel_sheets("urbanpop.xlsx"),read_excel,path ="urbanpop.xlsx")
-  AnswerTests: omnitest(correctExpr='pop_list <- lapply(excel_sheets("urbanpop.xlsx"),read_excel,path ="urbanpop.xlsx")')
-  Hint: pop_list <- lapply(excel_sheets("urbanpop.xlsx"),read_excel,path ="urbanpop.xlsx")
+  CorrectAnswer: pop_list <- lapply(excel_sheets(xlsx_path),read_excel,path =xlsx_path)
+  AnswerTests: omnitest(correctExpr='pop_list <- lapply(excel_sheets(xlsx_path),read_excel,path =xlsx_path)')
+  Hint: pop_list <- lapply(excel_sheets(xlsx_path),read_excel,path =xlsx_path)
 
 - Class: cmd_question
   Output: 打印pop_list的结构。
@@ -80,9 +77,9 @@
     
 - Class: cmd_question
   Output: 导入“urbanpop_nonames.xlsx”的第一个Excel工作表并将结果存储在pop_a中。 让R设置结果数据框本身的列名
-  CorrectAnswer: pop_a <- read_excel("urbanpop_nonames.xlsx", sheet = 1,col_names=FALSE)
-  AnswerTests: omnitest(correctExpr='pop_a <- read_excel("urbanpop_nonames.xlsx", sheet = 1,col_names=FALSE)')
-  Hint: pop_a <- read_excel("urbanpop_nonames.xlsx", sheet = 1,col_names=FALSE) 
+  CorrectAnswer: pop_a <- read_excel(xlsx_path, sheet = 1,col_names=FALSE)
+  AnswerTests: omnitest(correctExpr='pop_a <- read_excel(xlsx_path, sheet = 1,col_names=FALSE)')
+  Hint: pop_a <- read_excel(xlsx_path, sheet = 1,col_names=FALSE) 
   
 - Class: cmd_question
   Output: 打印出pop_a的摘要。
@@ -92,9 +89,9 @@
 
 - Class: cmd_question
   Output: 导入urbanpop_nonames.xlsx的第一个Excel工作表; 这次使用已经准备好的列向量(cols)来指定列名。 将结果数据框存储在pop_b中。
-  CorrectAnswer: pop_b <- read_excel("urbanpop_nonames.xlsx", sheet = 1,col_names=cols)
-  AnswerTests: omnitest(correctExpr='pop_b <- read_excel("urbanpop_nonames.xlsx", sheet = 1,col_names=cols)')
-  Hint: pop_b <- read_excel("urbanpop_nonames.xlsx", sheet = 1,col_names=cols)
+  CorrectAnswer: pop_b <- read_excel(xlsx_path, sheet = 1,col_names=cols)
+  AnswerTests: omnitest(correctExpr='pop_b <- read_excel(xlsx_path, sheet = 1,col_names=cols)')
+  Hint: pop_b <- read_excel(xlsx_path, sheet = 1,col_names=cols)
 
 - Class: cmd_question
   Output: 打印出pop_b的摘要。 你能发现与其他摘要的区别吗？
@@ -110,9 +107,9 @@
 
 - Class: cmd_question
   Output: 导入第二张“urbanpop.xlsx”，但跳过前21行。 确保设置col_names = FALSE。 将结果数据框存储在变量urbanpop_sel中。
-  CorrectAnswer: urbanpop_sel <- read_excel("urbanpop_nonames.xlsx", sheet = 2,col_names=FALSE,skip=21)
-  AnswerTests: omnitest(correctExpr='urbanpop_sel <- read_excel("urbanpop_nonames.xlsx", sheet = 2,col_names=FALSE,skip=21)')
-  Hint: urbanpop_sel <- read_excel("urbanpop_nonames.xlsx", sheet = 2,col_names=FALSE,skip=21)
+  CorrectAnswer: urbanpop_sel <- read_excel(xlsx_path, sheet = 2,col_names=FALSE,skip=21)
+  AnswerTests: omnitest(correctExpr='urbanpop_sel <- read_excel(xlsx_path, sheet = 2,col_names=FALSE,skip=21)')
+  Hint: urbanpop_sel <- read_excel(xlsx_path, sheet = 2,col_names=FALSE,skip=21)
 
 - Class: cmd_question
   Output: 从urbanpop_sel中选择第一个观察结果并打印出来

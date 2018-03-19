@@ -10,14 +10,15 @@
   Output: 大量数据以平面文件的形式出现：简单的表格文本文件。 了解如何使用基本R函数导入所有常用格式的平面文件数据。
 
 - Class: text
-  Output: 在启动时自动加载到R会话中的utils包可以使用read.csv（）函数导入CSV文件
+  Output: 在启动时自动加载到R会话中的utils包可以使用read.csv()函数导入CSV文件
 
 - Class: text
   Output: 在这个练习中，你将使用swimming_pools.csv; 它包含澳大利亚布里斯班游泳池的数据（资料来源：data.gov.au）。 
     该文件在第一行中包含列名称。 它使用逗号分隔行内的值。
     
 - Class: cmd_question
-  Output: 使用read.csv()将“swimming_pools.csv”作为数据框导入并赋值给变量pools。
+  Output: 我们已经将“swimming_pools.csv”的路径放在了预定义变量csv_path里。使用read.csv()将“swimming_pools.csv”作为
+    数据框导入并赋值给变量pools。
   CorrectAnswer: pools <- read.csv(csv_path)
   AnswerTests: omnitest(correctExpr='pools <- read.csv(csv_path)')
   Hint: pools <- read.csv(csv_path)
@@ -34,7 +35,8 @@
     则与文本文件中的字符串对应的数据框列将为字符。swimming_pools.csv文件包含两列（Name和Address），不应该是因子类型。
   
 - Class: cmd_question
-  Output: 使用read.csv()将“swimming_pools.csv”中的数据导入为一个名为pools的数据框; 确保字符串作为字符导入，而不是作为因子。
+  Output: 使用read.csv()将“swimming_pools.csv”中的数据导入为一个名为pools的数据框; 确保字符串作为字符导入，
+    而不是作为因子。路径依然为csv_path。
   CorrectAnswer: pools <- read.csv("swimming_pools.csv",stringsAsFactors=FALSE)
   AnswerTests: omnitest(correctExpr='pools <- read.csv("swimming_pools.csv",stringsAsFactors=FALSE)')
   Hint: 设置stringsAsFactors为FALSE。
@@ -51,10 +53,10 @@
 
 - Class: cmd_question
   Output: 导入hotdogs.txt，其中包含不同热狗中钠和热量水平的信息（来源：UCLA）。 数据集有3个变量，但变量名在文件的第一行中不可用。 
-    该文件使用制表符作为字段分隔符。将导入的数据命名为数据框hotdogs。
-  CorrectAnswer: hotdogs <- read.delim("hotdogs.txt",header=FALSE)
-  AnswerTests: omnitest(correctExpr='hotdogs <- read.delim("hotdogs.txt",header=FALSE)')
-  Hint: hotdogs <- read.delim("hotdogs.txt",header=FALSE)，注意header参数设置为FALSE。
+    该文件使用制表符作为字段分隔符。将导入的数据命名为数据框hotdogs。"hotdogs.txt"路径在预定义变量txt_path里。
+  CorrectAnswer: hotdogs <- read.delim(txt_path,header=FALSE)
+  AnswerTests: omnitest(correctExpr='hotdogs <- read.delim(txt_path,header=FALSE)')
+  Hint: hotdogs <- read.delim(txt_path,header=FALSE)，注意header参数设置为FALSE。
   
 - Class: cmd_question
   Output: 调用hotdogs的summary()。 这将打印出关于数据框中所有变量的汇总统计信息。
@@ -64,21 +66,20 @@
 
 - Class: text
   Output: 如果你正在处理更奇特的平面文件格式，你会想使用read.table（）。 这是最基本的导入功能; 你可以在这个函数中指定多个不同的参数。
-    与read.csv（）和read.delim（）不同，header参数默认为FALSE，sep参数默认为""。
+    与read.csv()和read.delim（）不同，header参数默认为FALSE，sep参数默认为""。
 
 - Class: cmd_question
   Output: 数据仍然是hotdogs.txt。 它在第一行中没有列名称(使用col.names指定列名称,列名称为"type", "calories", "sodium")，
-    字段分隔符是制表符'\t'(使用sep参数指定)，将结果赋值为变量hotdogs。
-  CorrectAnswer: hotdogs <- read.table("hotdogs.txt",sep = "\t",col.names = c("type", "calories", "sodium"))
-  AnswerTests: omnitest(correctExpr='hotdogs <- read.table("hotdogs.txt",sep = "\t",col.names = c("type", "calories", "sodium"))')
-  Hint: hotdogs <- read.table("hotdogs.txt",sep = "\t",col.names = c("type", "calories", "sodium"))
+    字段分隔符是制表符'\t'(使用sep参数指定)，将结果赋值为变量hotdogs。"hotdogs.txt"路径依然为预定义变量txt_path里
+  CorrectAnswer: hotdogs <- read.table(txt_path,sep = "\t",col.names = c("type", "calories", "sodium"))
+  AnswerTests: omnitest(correctExpr='hotdogs <- read.table(txt_path,sep = "\t",col.names = c("type", "calories", "sodium"))')
+  Hint: hotdogs <- read.table(txt_path,sep = "\t",col.names = c("type", "calories", "sodium"))
 
 - Class: cmd_question
   Output: 在hotdogs上打head(); 这将打印数据框中的前6个观察值。
   CorrectAnswer: head(hotdogs)
   AnswerTests: omnitest(correctExpr='head(hotdogs)')
   Hint: head(hotdogs)
-
 
 - Class: text
   Output: 莉莉和汤姆正在争吵，因为他们想分享一个热狗，但他们似乎无法就要选择哪一个达成一致。 过了一段时间，
@@ -91,12 +92,12 @@
 - Class: cmd_question
   Output: 通过read.delim（）调用以导入“hotdogs.txt”中的数据。 这是一个制表符分隔的文件，在第一行没有名字,通过col.names指定列名称为
     "type", "calories", "sodium"
-  CorrectAnswer: hotdogs <- read.delim("hotdogs.txt", header = FALSE, col.names = c("type", "calories", "sodium"))
-  AnswerTests: omnitest(correctExpr='hotdogs <- read.delim("hotdogs.txt", header = FALSE, col.names = c("type", "calories", "sodium"))')
-  Hint: hotdogs <- read.delim("hotdogs.txt", header = FALSE, col.names = c("type", "calories", "sodium"))
+  CorrectAnswer: hotdogs <- read.delim(txt_path, header = FALSE, col.names = c("type", "calories", "sodium"))
+  AnswerTests: omnitest(correctExpr='hotdogs <- read.delim(txt_path, header = FALSE, col.names = c("type", "calories", "sodium"))')
+  Hint: hotdogs <- read.delim(txt_path, header = FALSE, col.names = c("type", "calories", "sodium"))
 
 - Class: cmd_question
-  Output: 选择卡路里数最低的观察值并将其存储在变量lily。 使用函数which.min（），它返回一个向量中的最小值的索引。
+  Output: 选择卡路里数最低的观察值并将其存储在变量lily。 使用函数which.min()，它返回一个向量中的最小值的索引。
   CorrectAnswer: lily <- hotdogs[which.min(hotdogs$calories), ]
   AnswerTests: omnitest(correctExpr='lily <- hotdogs[which.min(hotdogs$calories), ]')
   Hint: lily <- hotdogs[which.min(hotdogs$calories), ]

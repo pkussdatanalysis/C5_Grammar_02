@@ -9,7 +9,6 @@
 }
 
 # Path to data
-course_path <- file.path(.get_course_path(),
-                      'C5_Grammar_02', 'Importing_Excel_data')
-setwd(course_path)
+xlsx_path <- file.path(.get_course_path(),
+                      'C5_Grammar_02', 'Importing_Excel_data','urbanpop_nonames.xlsx')	
 cols <- c("country", paste0("year_", 1960:1966))

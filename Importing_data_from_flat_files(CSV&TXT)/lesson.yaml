@@ -19,8 +19,8 @@
 - Class: cmd_question
   Output: 使用read.csv()将“swimming_pools.csv”作为数据框导入并赋值给变量pools。
   CorrectAnswer: pools <- read.csv(csv_path)
-  AnswerTests: omnitest(correctExpr='pools <- read.csv("swimming_pools.csv")')
-  Hint: pools <- read.csv("swimming_pools.csv")
+  AnswerTests: omnitest(correctExpr='pools <- read.csv(csv_path)')
+  Hint: pools <- read.csv(csv_path)
 
 - Class: cmd_question
   Output: 使用str()打印pools的结构。

@@ -6,8 +6,8 @@
 }
 
 # Path to data
-course_path <- file.path(.get_course_path(),
-                      'C5_Grammar_02', 'Importing_data_from_flat_files(CSV&TXT)')					  
+csv_path <- file.path(.get_course_path(),
+                      'C5_Grammar_02', 'Importing_data_from_flat_files(CSV&TXT)','swimming_pools.csv')					  
 # Code placed in this file fill be executed every time the
       # lesson is started. Any variables created here will show up in
       # the user's working directory and thus be accessible to them

@@ -17,20 +17,8 @@
     该文件在第一行中包含列名称。 它使用逗号分隔行内的值。
     
 - Class: cmd_question
-  Output: change working directory。
-  CorrectAnswer: setwd(course_path)
-  AnswerTests: omnitest(correctExpr='setwd(course_path)')
-  Hint: setwd(course_path)
-  
-- Class: cmd_question
-  Output: 在控制台中输入dir()以列出工作目录中的文件。 你会看到它包含了swimming_pools.csv，所以你可以马上开始。
-  CorrectAnswer: dir()
-  AnswerTests: omnitest(correctExpr='dir()')
-  Hint: dir()
-
-- Class: cmd_question
   Output: 使用read.csv()将“swimming_pools.csv”作为数据框导入并赋值给变量pools。
-  CorrectAnswer: pools <- read.csv("swimming_pools.csv")
+  CorrectAnswer: pools <- read.csv(csv_path)
   AnswerTests: omnitest(correctExpr='pools <- read.csv("swimming_pools.csv")')
   Hint: pools <- read.csv("swimming_pools.csv")
 

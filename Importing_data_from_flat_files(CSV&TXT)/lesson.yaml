@@ -15,7 +15,13 @@
 - Class: text
   Output: 在这个练习中，你将使用swimming_pools.csv; 它包含澳大利亚布里斯班游泳池的数据（资料来源：data.gov.au）。 
     该文件在第一行中包含列名称。 它使用逗号分隔行内的值。
-
+    
+- Class: cmd_question
+  Output: change working directory。
+  CorrectAnswer: setwd(course_path)
+  AnswerTests: omnitest(correctExpr='setwd(course_path)')
+  Hint: setwd(course_path)
+  
 - Class: cmd_question
   Output: 在控制台中输入dir()以列出工作目录中的文件。 你会看到它包含了swimming_pools.csv，所以你可以马上开始。
   CorrectAnswer: dir()

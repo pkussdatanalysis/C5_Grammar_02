@@ -7,8 +7,7 @@
 
 # Path to data
 course_path <- file.path(.get_course_path(),
-                      'C5_Grammar_02', 'Importing_data_from_flat_files(CSV&TXT)')
-setwd(course_path)					  
+                      'C5_Grammar_02', 'Importing_data_from_flat_files(CSV&TXT)')					  
 # Code placed in this file fill be executed every time the
       # lesson is started. Any variables created here will show up in
       # the user's working directory and thus be accessible to them

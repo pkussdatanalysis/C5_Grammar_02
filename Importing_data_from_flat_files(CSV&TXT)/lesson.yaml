@@ -37,8 +37,8 @@
 - Class: cmd_question
   Output: 使用read.csv()将“swimming_pools.csv”中的数据导入为一个名为pools的数据框; 确保字符串作为字符导入，
     而不是作为因子。路径依然为csv_path。
-  CorrectAnswer: pools <- read.csv("swimming_pools.csv",stringsAsFactors=FALSE)
-  AnswerTests: omnitest(correctExpr='pools <- read.csv("swimming_pools.csv",stringsAsFactors=FALSE)')
+  CorrectAnswer: pools <- read.csv(csv_path,stringsAsFactors=FALSE)
+  AnswerTests: omnitest(correctExpr='pools <- read.csv(csv_path,stringsAsFactors=FALSE)')
   Hint: 设置stringsAsFactors为FALSE。
 
 - Class: cmd_question
